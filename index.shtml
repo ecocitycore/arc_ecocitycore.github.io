@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Ecocity Lifelong Learning Network</title>
+		<meta name="description" content="Educational network, new tools being prepared to provide private learning space free forever." />
+		<meta name="keywords" content="sustainable community planning, goals for sustainable development, sustainability education portal, Post-2015 SDGs, Sustainable Development Goals" />
+		<meta name="author" content="Biomassives Group Ltd." />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
+<!--		<link rel="stylesheet" type="text/css" href="css/style2.css" />-->
+<style>
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:900,300|Raleway:500|Martel+Sans:400,700);
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'ecocityicons';
+  src: url("/fonts/ecocityicons/codropsicons.eot");
+  src: url("/fonts/ecocityicons/codropsicons.eot?#iefix") format("embedded-opentype"), url("/fonts/ecocityicons/codropsicons.woff") format("woff"), url("/fonts/ecocityicons/codropsicons.ttf") format("truetype"), url("/fonts/ecocityicons/codropsicons.svg#codropsicons") format("svg");
+}
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: '';
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+body {
+  background: #fff;
+  color: #7b7b7b;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Martel Sans", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  overflow-y: scroll;
+  /* force scroll to appear */
+}
+
+/* helper class when showing content */
+.noscroll {
+  overflow: hidden;
+}
+
+a {
+  outline: none;
+  color: #81c483;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #333;
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Sidebar */
+.sidebar {
+  text-align: center;
+  background: #f5f5f5;
+  z-index: 1000;
+  position: fixed;
+  width: 300px;
+  max-width: 100%;
+  height: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  padding: 2em 1em;
+}
+
+.sidebar h1 {
+  margin: 0.75em 0 0;
+  font-size: 2em;
+  line-height: 1;
+  font-family: "Source Sans Pro";
+}
+
+.sidebar h1 span {
+  display: block;
+}
+
+/* Codrops links */
+.ecocity-links {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  min-height: 45px;
+}
+
+.ecocity-links::after {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: #ddd;
+  content: '';
+  -webkit-transform: rotate3d(0, 0, 1, 22.5deg);
+  transform: rotate3d(0, 0, 1, 22.5deg);
+}
+
+.ecocity-icon {
+  display: inline-block;
+  margin: 0.5em;
+  padding: 0em 0;
+  width: 1.5em;
+  text-decoration: none;
+}
+
+.ecocity-icon span {
+  display: block;
+}
+
+.ecocity-icon:before {
+  margin: 0 5px;
+  text-transform: none;
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-family: 'ecocityicons';
+  line-height: 1;
+  speak: none;
+}
+
+.ecocity-icon--drop:before {
+  content: "\e001";
+}
+
+.ecocity-icon--prev:before {
+  content: "\e004";
+}
+
+/* Demo links */
+.ecocity-demos {
+  margin: 2em 0 0;
+  font-size: 0.75em;
+}
+
+.ecocity-demos a {
+  display: inline-block;
+  margin: 0 0.5em;
+}
+
+.ecocity-demos a.current-demo {
+  color: #333;
+  font-weight: bold;
+}
+
+.ecocity-demos a.current-demo:focus {
+  color: #aaa;
+}
+
+.related {
+  font-size: 0.85em;
+  padding-bottom: 1em;
+}
+
+.related h3 {
+  margin: 3em 0 0.5em 0;
+  font-size: 0.95em;
+}
+
+.related a {
+  display: block;
+  color: inherit;
+}
+
+.related a:hover,
+.related a:focus {
+  color: #414741;
+}
+
+/* Main content */
+.main {
+  position: relative;
+  z-index: 50;
+}
+
+/* Grid container */
+.grid {
+  position: relative;
+}
+
+/* Overlay */
+.grid::after {
+  content: '';
+  background: rgba(202, 202, 202, 0.4);
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.view-single .grid::after {
+  opacity: 1;
+}
+
+/* Top bar above the grid */
+.top-bar {
+  background: #fff;
+  width: 100%;
+  line-height: 1;
+  padding: 15px 15px 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.top-bar__headline {
+  margin: 0;
+  font-size: 0.75em;
+}
+
+/* Menu button for toggling the sidebar (appears on small screen) */
+.menu-toggle {
+  position: fixed;
+  z-index: 100;
+  display: block;
+  width: 25px;
+  height: 25px;
+  top: 14px;
+  left: 14px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: none;
+  margin: -2px 15px 0 0;
+}
+
+.menu-toggle span {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #81c483;
+  font-size: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.menu-toggle span:before,
+.menu-toggle span:after {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #81c483;
+  content: '';
+}
+
+.menu-toggle span:before {
+  -webkit-transform: translateY(-7px);
+  transform: translateY(-7px);
+}
+
+.menu-toggle span:after {
+  -webkit-transform: translateY(7px);
+  transform: translateY(7px);
+}
+
+/* Filter/dropdown dummy on the right */
+.filter {
+  text-align: right;
+  font-size: 0.75em;
+  margin-left: auto;
+}
+
+.dropdown {
+  font-weight: bold;
+  margin-left: 5px;
+  cursor: pointer;
+  color: #81c483;
+}
+
+.dropdown::after {
+  content: '\25BC';
+  margin-left: 2px;
+  font-size: 80%;
+}
+
+/* Grid item */
+.grid__item {
+  padding: 45px 55px 30px;
+  position: relative;
+  color: inherit;
+  background: #fff;
+  min-height: 300px;
+  cursor: pointer;
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+/* Grid item "border" */
+.grid__item::before {
+  position: absolute;
+  content: '';
+  top: 0px;
+  right: 55px;
+  bottom: 0px;
+  left: 55px;
+  border-bottom: 1px solid rgba(74, 74, 74, 0.075);
+}
+
+.grid__item * {
+  z-index: 10;
+}
+
+/* grid item element and full content element styles */
+.title {
+  margin: 0;
+  font-size: 1.375em;
+  font-family: "Source Sans Pro";
+  text-align: center;
+}
+
+.title--preview {
+  -webkit-flex: 1;
+  flex: 1;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.loader {
+  height: 1px;
+  width: 40%;
+  margin: 1em auto;
+  position: relative;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.loader::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: #a4e7ad;
+  left: 0;
+  top: -1px;
+  -webkit-transform: scale3d(0, 1, 1);
+  transform: scale3d(0, 1, 1);
+  -webkit-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+}
+
+.grid__item--loading .loader::before {
+  -webkit-transition: -webkit-transform 1s;
+  transition: transform 1s;
+  -webkit-transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+}
+
+.category {
+  margin: 0;
+  position: relative;
+  font-size: 0.95em;
+  font-style: italic;
+  font-family: "Source Sans Pro";
+  text-align: center;
+  display: block;
+}
+
+.title--preview,
+.loader,
+.category {
+  -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+/* closing (delays) */
+.title--preview {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+
+.loader {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+
+.grid__item .category {
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+/* opening */
+.grid__item--animate .title--preview {
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+  opacity: 0;
+  -webkit-transform: translate3d(0, -20px, 0);
+  transform: translate3d(0, -20px, 0);
+}
+
+.grid__item--animate .loader {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+  opacity: 0;
+  -webkit-transform: translate3d(0, -30px, 0);
+  transform: translate3d(0, -30px, 0);
+}
+
+.grid__item--animate .category {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+  opacity: 0;
+  -webkit-transform: translate3d(0, -40px, 0);
+  transform: translate3d(0, -40px, 0);
+}
+
+.meta {
+  font-size: 0.765em;
+  text-align: left;
+}
+
+.meta .fa {
+  margin-right: 4px;
+}
+
+.meta:before, .meta:after {
+  display: table;
+  content: '';
+}
+
+.meta:after {
+  clear: both;
+}
+
+.meta__avatar {
+  display: block;
+  border-radius: 50%;
+  margin: 2em auto;
+}
+
+.meta--preview .meta__avatar {
+  -webkit-filter: grayscale(50%);
+  filter: grayscale(50%);
+}
+
+.grid__item:hover {
+  background: #efefef;
+}
+
+.grid__item:hover .meta--preview .meta__avatar,
+.grid__item:focus .meta--preview .meta__avatar {
+  -webkit-filter: none;
+  filter: none;
+}
+.meta__date {
+  display: block;
+  float: left;
+  color: #aaa;
+}
+.meta__reading-time {
+  display: hidden;
+  color: #aaa;
+  text-align: right;
+  float: right;
+}
+
+.meta__misc {
+  display: hidden;
+  clear: both;
+  text-align: left;
+  padding: 5px 0;
+}
+
+.meta__misc--seperator {
+  padding: 20px 0 0;
+  margin: 65px 0 0;
+  border-top: 1px solid #f5f5f5;
+}
+
+.article-nav {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.article-nav button {
+  border: none;
+  color: #81c483;
+  background: none;
+}
+
+.article-nav button:hover {
+  color: #333;
+}
+
+.meta--preview .meta__avatar,
+.meta--preview .meta__date,
+.meta--preview .meta__reading-time {
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.grid__item--loading .meta__avatar {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+
+.grid__item--loading .meta__date {
+  -webkit-transition-delay: 0.17s;
+  transition-delay: 0.17s;
+}
+
+.grid__item--loading .meta__reading-time {
+  -webkit-transition-delay: 0.24s;
+  transition-delay: 0.24s;
+}
+
+.grid__item--loading .meta__avatar,
+.grid__item--loading .meta__date,
+.grid__item--loading .meta__reading-time {
+  -webkit-transform: scale3d(0.5, 0.5, 1);
+  transform: scale3d(0.5, 0.5, 1);
+  opacity: 0;
+}
+
+/* Grid footer */
+.page-meta {
+  width: 100%;
+  background: #fff;
+  width: 100%;
+  padding: 15px 15px 10px;
+  text-align: center;
+  font-size: 0.75em;
+  font-weight: bold;
+  cursor: default;
+}
+
+/* Placeholder element (dummy that gets animated when we click on an item) */
+.placeholder {
+  pointer-events: none;
+  position: absolute;
+  width: calc(100% + 5px);
+  height: calc(100vh + 5px);
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background: #fff;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+.placeholder.placeholder--trans-in {
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  -webkit-transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.placeholder.placeholder--trans-out {
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+}
+
+/* main content */
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  height: 0;
+  /* Avoid second scroll bar in Chrome! */
+  visibility: hidden;
+  z-index: 400;
+  overflow: hidden;
+}
+
+.content.content--show {
+  height: 100vh;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* scroll helper wrap */
+.scroll-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* single content item */
+.content__item {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  padding: 60px 60px 80px 60px;
+  pointer-events: none;
+  font-size: 0.85em;
+}
+.content__item p {
+  max-width: 1200px;
+  margin: 1em auto;
+  text-align: justify;
+}
+.content__item p:first-of-type {
+  font-size: 1.35em;
+}
+
+.content__item.content__item--show {
+  height: auto;
+  min-height: 100vh;
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
+}
+
+/* content elements */
+.category--full {
+  font-size: 1.25em;
+  margin-bottom: 20px;
+  color: #81c483;
+}
+
+.title--full {
+  font-size: 3.25em;
+}
+
+.meta--full {
+  font-size: 1em;
+  margin: 0 auto 2em;
+  max-width: 1200px;
+}
+.meta--full .meta__author {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.meta--full .meta__author::before {
+  content: 'by ';
+  font-weight: normal;
+}
+.meta--full .meta__category {
+  font-style: italic;
+  float: left;
+  margin: 0 5px;
+  font-family: "Source Sans Pro";
+}
+.meta--full .meta__category::before {
+  content: "in ";
+}
+.meta--full .meta__avatar {
+  margin: 1em auto;
+}
+
+.category--full,
+.title--full,
+.meta--full .meta__avatar,
+.meta--full .meta__author,
+.meta--full .meta__date,
+.meta--full .meta__reading-time {
+  opacity: 0;
+}
+
+.content__item p {
+  opacity: 0;
+}
+
+.category--full,
+.title--full {
+  -webkit-transform: translate3d(0, 40px, 0);
+  transform: translate3d(0, 40px, 0);
+}
+
+.meta--full .meta__avatar,
+.meta--full .meta__author,
+.meta--full .meta__date,
+.meta--full .meta__reading-time {
+  -webkit-transform: scale3d(0.5, 0.5, 1);
+  transform: scale3d(0.5, 0.5, 1);
+}
+
+.content__item--show .category--full,
+.content__item--show .title--full,
+.content__item--show .meta--full .meta__avatar,
+.content__item--show .meta--full .meta__author,
+.content__item--show .meta--full .meta__date,
+.content__item--show .meta--full .meta__reading-time {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.content__item--show .category--full,
+.content__item--show .title--full {
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.content__item--show .title--full {
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+}
+
+.content__item--show .meta--full .meta__avatar {
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+}
+
+.content__item--show .meta--full .meta__date {
+  -webkit-transition-delay: 0.27s;
+  transition-delay: 0.27s;
+}
+
+.content__item--show .meta--full .meta__reading-time {
+  -webkit-transition-delay: 0.34s;
+  transition-delay: 0.34s;
+}
+
+.content__item--show.content__item p {
+  opacity: 1;
+  -webkit-transition: opacity 0.5s 0.25s;
+  transition: opacity 0.5s 0.25s;
+}
+
+/* close button (for content and sidebar) */
+.close-button {
+  position: absolute;
+  border: none;
+  background: none;
+  margin: 0;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  font-size: 18px;
+  color: #ddd;
+  cursor: pointer;
+  pointer-events: none;
+  padding: 20px 30px;
+  min-width: 100%
+  opacity: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.close-button span {
+  display: none;
+}
+
+.close-button:hover {
+  color: #7b7b7b;
+}
+
+/* show class for content close button */
+.close-button--show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Viewport sizes based on column number and sidebar */
+/* 1 column */
+/* 2 columns */
+/* 3 columns */
+/* 4 columns */
+/* 5 columns */
+/* 6 columns */
+@media screen and (min-width: 600px) {
+  html,
+  body,
+  .container,
+  .main {
+    height: 100vh;
+  }
+
+  .main {
+    height: 100%;
+    margin-left: 300px;
+  }
+
+  .content__item {
+    font-size: 1em;
+  }
+
+  .grid__item {
+    padding: 45px 45px 30px;
+  }
+
+  /* Demo ad */
+  body #cdawrap {
+    right: auto;
+    left: 30px;
+    top: auto;
+    bottom: 0;
+    background: none;
+    border: none;
+    width: 240px;
+    background: #f5f5f5;
+  }
+
+  body #cdawrap .carbon-text {
+    color: #7b7b7b;
+  }
+
+  body #cdawrap a.carbon-poweredby {
+    color: #7883C4;
+  }
+
+  body #cdawrap a:hover.carbon-poweredby {
+    color: #333;
+  }
+
+  body #cdawrap #cda-remove {
+    display: none;
+  }
+}
+@media screen and (min-width: 900px) {
+  .grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  /* 2 columns */
+  .grid__item {
+    width: 50%;
+    border: none;
+  }
+
+  .grid__item::before {
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    border: 1px solid rgba(74, 74, 74, 0.075);
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+  }
+
+  .grid__item:hover::before,
+  .grid__item:focus::before {
+    border: 3px solid rgba(129, 196, 131, 0.5);
+  }
+
+  .grid__item--loading.grid__item::before {
+    opacity: 0;
+  }
+}
+@media screen and (min-width: 1200px) {
+  /* 3 columns */
+  .grid__item {
+    width: 33.333%;
+  }
+}
+@media screen and (min-width: 1500px) {
+  /* 4 columns */
+  .grid__item {
+    width: 25%;
+  }
+}
+@media screen and (min-width: 1800px) {
+  /* 5 columns */
+  .grid__item {
+    width: 20%;
+  }
+}
+@media screen and (min-width: 2100px) {
+  /* 6 columns */
+  .grid__item {
+    width: 16.66%;
+  }
+}
+/* small screen changes for sidebar (it becomes an off-canvas menu) */
+@media screen and (max-width: 599px) {
+  .sidebar {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
+  }
+
+  .sidebar.sidebar--open {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .sidebar.sidebar--open ~ .main {
+    pointer-events: none;
+  }
+
+  .top-bar {
+    padding: 22px 15px 10px 60px;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+  }
+
+  .sidebar .close-button {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .title--full {
+    font-size: 2em;
+  }
+
+  .content__item {
+    padding: 80px 20px 40px;
+  }
+
+  .content .close-button {
+    padding: 10px 20px;
+  }
+
+  .content .close-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid #f5f5f5;
+    width: 100vw;
+    height: 50px;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+@media screen and (max-height: 580px) {
+  body #cdawrap {
+    display: none;
+  }
+}
+/* Redefine some styles for this layout */
+body {
+  background: #f5f5f5;
+}
+
+.content {
+  left: auto;
+  right: 0;
+  width: 100vw;
+}
+
+.content__item p {
+  font-size: 1.15em;
+}
+
+.content__item p:first-of-type {
+  margin-top: 3em;
+  font-size: 1.15em;
+  font-weight: bold;
+}
+
+.fa-heart {
+  color: #c84252;
+}
+
+/* Redefine the delays for the content items when they appear; redefine the translation (now from the left) */
+.title--preview {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+
+.loader {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+
+.grid__item .category {
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+.grid__item--animate .title--preview {
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+  -webkit-transform: translate3d(-20px, 0, 0);
+  transform: translate3d(-20px, 0, 0);
+}
+
+.grid__item--animate .loader {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+  -webkit-transform: translate3d(-30px, 0, 0);
+  transform: translate3d(-30px, 0, 0);
+}
+
+.grid__item--animate .category {
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
+  -webkit-transform: translate3d(-40px, 0, 0);
+  transform: translate3d(-40px, 0, 0);
+}
+
+.category--full,
+.title--full {
+  -webkit-transform: translate3d(40px, 0, 0);
+  transform: translate3d(40px, 0, 0);
+}
+
+.content__item--show .title--full {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
+}
+
+@media screen and (min-width: 600px) {
+  .sidebar,
+  .grid {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+  }
+
+  .view-single .sidebar,
+  .view-single .grid {
+    -webkit-transform: translate3d(calc(280px - 100vw), 0, 0);
+    transform: translate3d(calc(280px - 100vw), 0, 0);
+  }
+
+  .content__item {
+    right: 0;
+    padding-left: 340px;
+  }
+
+  .meta--full {
+    position: fixed;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    top: 0;
+    left: 0;
+    font-size: 0.85em;
+    padding: 15px 30px;
+  }
+
+  .article-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #f5f5f5;
+  }
+
+  .article-nav button {
+    width: 50%;
+    padding: 25px;
+  }
+
+  .article-nav button:hover {
+    color: #fff;
+    background: #81c483;
+  }
+
+  .article-nav button:first-child {
+    border-right: 1px solid #f5f5f5;
+  }
+}
+@media screen and (max-width: 899px) {
+  .meta--full .meta__date,
+  .meta--full .meta__reading-time {
+    float: none;
+    text-align: center;
+  }
+
+  .meta__misc--seperator {
+    margin-top: 20px;
+  }
+
+  .article-nav button span {
+    display: none;
+  }
+}
+@media screen and (max-width: 599px) {
+  .meta__misc,
+  .article-nav {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=style2.css.map */
+
+</style>
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+			<div id="theSidebar" class="sidebar">
+				<button class="close-button fa fa-fw fa-close"></button>
+				
+				<img src="/00.png" width=35%>
+				
+				<nav class="ecocity-demos">
+					This edition of ecocity.com is focused on exploring the international dialogue and thought process behind the Post-2015 sustainable development goals, culminating 28 sept 2015<BR>
+
+<A href=http://www.theguardian.com/global-development/2015/jan/19/sustainable-development-goals-united-nations>The Guardian's Interactive Review</a><br> 
+<a href="http://www.undp.org/content/undp/en/home/mdgoverview.html">[1]</a> <a href="https://sustainabledevelopment.un.org/sdgsproposal.html">[2]</a>
+<BR><!--#config timefmt="%A" --> <!--#echo var="DATE_LOCAL" -->
+
+				</nav>
+				<div class="related">
+					<h3>
+    Ecocity Lifelong Learning Network is a Colorado not-for profit organization working
+    to support greater literacy and practice in sustainable
+    community development.</h3>
+				</div>
+			</div>
+			<div id="theGrid" class="main">
+				<section class="grid">
+					<header class="top-bar">
+						<h2 class="top-bar__headline">Latest articles</h2>
+						<div class="filter">
+							<span>Filter by:</span>
+							<span class="dropdown">Popular</span>
+						</div>
+					</header>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Eradicate Extreme Poverty and Hunger</h2>
+						<div class="loader"></div>
+						<span class="category">8 MDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/4.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Achieve Universal Primary Education</h2>
+						<div class="loader"></div>
+						<span class="category">8 MDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/5.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Promote Gender Equality</h2>
+						<div class="loader"></div>
+						<span class="category">8 MDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/1.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Reduce Child Mortality</h2>
+						<div class="loader"></div>
+						<span class="category">8 MDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/2.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 7 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 5 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Improve Maternal Health</h2>
+						<div class="loader"></div>
+						<span class="category">8 MDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Combat HIV/AIDS, Malaria, and Other Diseases</h2>
+						<div class="loader"></div>
+						<span class="category">8 MDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/6.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Environmental Sustainability</h2>
+						<div class="loader"></div>
+						<span class="category">8 MDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/7.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Global Partnership in Sustainable Development</h2>
+						<div class="loader"></div>
+						<span class="category">8 MDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="author08" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">End poverty in all its forms everywhere</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/1.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">End hunger, achieve food security and improved nutrition, and promote sustainable agriculture</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Ensure healthy lives and promote wellbeing for all at all ages</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="author04" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/1.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Achieve gender equality and empower all women and girls</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/2.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 7 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 5 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Ensure availability and sustainable management of water and sanitation for all</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="author03" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Ensure access to affordable, reliable, sustainable and modern energy for all</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Promote sustained, inclusive and sustainable economic growth, full and productive employment, and decent work for all</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/5.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Build resilient infrastructure, promote inclusive and sustainable industrialisation, and foster innovation</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/6.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Reduce inequality within and among countries</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/7.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Make cities and human settlements inclusive, safe, resilient and sustainable</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Ensure sustainable consumption and production patterns</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/1.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Take urgent action to combat climate change and its impacts (taking note of agreements made by the UNFCCC forum)</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="img/authors/2.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Conserve and sustainably use the oceans, seas and marine resources for sustainable development</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<a class="grid__item" href="#">
+						<h2 class="title title--preview">Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification and halt and reverse land degradation, and halt biodiversity loss</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+						<a class="grid__item" href="#">
+						<h2 class="title title--preview">Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="source" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+						<a class="grid__item" href="#">
+						<h2 class="title title--preview">Strengthen the means of implementation and revitalise the global partnership for sustainable development</h2>
+						<div class="loader"></div>
+						<span class="category">17 SDGs</span>
+						<div class="meta meta--preview">
+							<img class="meta__avatar" src="0000.png" alt="author04" /> 
+							<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+							<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+						</div>
+					</a>
+					<footer class="page-meta">
+						<span>Load more...</span>
+					</footer>
+				</section>
+				<section class="content">
+					<div class="scroll-wrap">
+						<article class="content__item">
+							<span class="category category--full">MDG #1</span>
+							<h2 class="title title--full">Eradicate Extreme Poverty and Hunger</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="author04" />
+								<span class="meta__author">Wikipedia</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 7 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 12 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_Eradicate-Extreme-Poverty-And-Hunger.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">MDG #2</span>
+							<h2 class="title title--full">Achieve Universal Primary Education</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/5.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 23 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 253 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_Achieve-Universal-Primary-Education.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">MDG #3</span>
+							<h2 class="title title--full">Promote Gender Equality</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/1.png" alt="source" />
+								<span class="meta__author">Creative Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 12 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 45 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_Promote-Gender-Equality.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">MDG #4</span>
+							<h2 class="title title--full">Reduce Child Mortality</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/2.png" alt="source" />
+								<span class="meta__author">Creative Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 7 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 5 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 5 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 5 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_reduce-child-mortality.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">MDG #5</span>
+							<h2 class="title title--full">Improve Maternal Health</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 18 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 125 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_improve-maternal-health.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">MDG #6</span>
+							<h2 class="title title--full">Combat HIV/AIDS, Malaria, and Other Diseases</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/6.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 2 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 16 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_combat-hiv-aids-malaria.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">MDG #7</span>
+							<h2 class="title title--full">Environmental Sustainability</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/7.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 4 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 13 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_environmental-sustainability.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">MDG #8</span>
+							<h2 class="title title--full">Global Partnership in Sustainable Development</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 28 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 89 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_global-partnership-in-sustainable.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #1</span>
+							<h2 class="title title--full">End poverty in all its forms everywhere</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/1.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 9 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 19 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_end-poverty-in-all.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #2</span>
+							<h2 class="title title--full">End hunger, achieve food security and improved nutrition, and promote sustainable agriculture</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/2.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 18 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 76 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_end-hunger-achieve-food.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #3</span>
+							<h2 class="title title--full">Ensure healthy lives and promote wellbeing for all at all ages</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 39 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 328 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_ensure-healthy-lives-and.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #4</span>
+							<h2 class="title title--full">Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 5 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 23 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_ensure-inclusive-and-equitable.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #5</span>
+							<h2 class="title title--full">Achieve gender equality and empower all women and girls</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 9 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 3 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 27 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 77 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_achieve-gender-equality-and.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #6</span>
+							<h2 class="title title--full">Ensure availability and sustainable management of water and sanitation for all</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/2.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 7 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 5 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 9 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 43 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_ensure-availability-and-sustainable.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #7</span>
+							<h2 class="title title--full">Ensure access to affordable, reliable, sustainable and modern energy for all</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 13 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 47 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_ensure-access-to-affordable.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #7</span>
+							<h2 class="title title--full">Promote sustained, inclusive and sustainable economic growth, full and productive employment, and decent work for all</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 21 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 122 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_promote-sustained-inclusive-and.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #8</span>
+							<h2 class="title title--full">Build resilient infrastructure, promote inclusive and sustainable industrialisation, and foster innovation</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/5.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 3 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 19 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_build-resilient-infrastructure-promote.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #9</span>
+							<h2 class="title title--full">Reduce inequality within and among countries</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/6.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 19 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 38 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_reduce-inequality-within.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #10</span>
+							<h2 class="title title--full">Make cities and human settlements inclusive, safe, resilient and sustainable</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/7.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 19 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 75 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_make-cities-and-human.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #11</span>
+							<h2 class="title title--full">Ensure sustainable consumption and production patterns</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 14 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 41 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_ensure-sustainable-consumption-and.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #12</span>
+							<h2 class="title title--full">Take urgent action to combat climate change and its impacts (taking note of agreements made by the UNFCCC forum)</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/1.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 29 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 65 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_take-urgent-action-to.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #13</span>
+							<h2 class="title title--full">Conserve and sustainably use the oceans, seas and marine resources for sustainable development</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="img/authors/2.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 2 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 13 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_conserve-and-sustainably-use.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #14</span>
+							<h2 class="title title--full">Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification and halt and reverse land degradation, and halt biodiversity loss</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 19 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 32 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_protect-restore-and-promote.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #15</span>
+							<h2 class="title title--full">Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 54 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 278 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_promote-peaceful-and-inclusive.htm" --></p>
+						</article>
+						<article class="content__item">
+							<span class="category category--full">SDG #16</span>
+							<h2 class="title title--full">Strengthen the means of implementation and revitalize the global partnership for sustainable development</h2>
+							<div class="meta meta--full">
+								<img class="meta__avatar" src="0000.png" alt="source" />
+								<span class="meta__author">Wikimedia Commons</span>
+								<span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
+								<span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
+								<span class="meta__misc meta__misc--seperator"><i class="fa fa-comments-o"></i> 54 comments</span>
+								<span class="meta__misc"><i class="fa fa-heart"></i> 278 favorites</span>
+								<nav class="article-nav">
+									<button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
+									<button><span>Next</span> <i class="fa fa-angle-right"></i></button>
+								</nav>
+							</div>
+							<p><!--#include file="_strengthen-the-means-of.htm" --></p>
+						</article>
+
+					</div>
+					<button class="close-button"><i class="fa fa-close"></i><span>Close</span></button>
+				</section>
+			</div>
+		</div><!-- /container -->
+		<script src="js/classie.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
